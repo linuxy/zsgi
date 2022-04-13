@@ -27,7 +27,6 @@ static void zig_apps() {
 		exit(1);
 	}
 
-	uwsgi_log("[zsgi] here.\n");
 	time_t now = uwsgi_now();
 	int id = uwsgi_apps_cnt;
 
