@@ -1,5 +1,22 @@
+# zsgi
+a uWSGI zig integration, to run zig applications on the web.
+
+builds against zig 0.10.0+
+
+## Installation
+```
+$ git clone https://github.com/unbit/uwsgi.git
+$ cd uwsgi/plugins
+$ git clone git@github.com:linuxy/zsgi.git
+$ cd zsgi
+$ ./build.sh
+$ ./run.sh
+```
+
+## Benchmarks
 AMD 3990X Threadripper
 uwsgi 40 processes, 1 thread
+```
 linux@solar ~/P/u/p/zsgi (master)> wrk -c 100 -d 10 -t 100 http://localhost:8080
 Running 10s test @ http://localhost:8080
   100 threads and 100 connections
@@ -9,4 +26,4 @@ Running 10s test @ http://localhost:8080
   247356 requests in 10.10s, 12.97MB read
   Socket errors: connect 0, read 247356, write 1, timeout 0
 Requests/sec:  24484.19
-
+```
