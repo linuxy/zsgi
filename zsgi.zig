@@ -1,4 +1,5 @@
 const std = @import("std");
+const j2 = @import("jinja2.zig");
 const builtin = @import("builtin");
 const target = builtin.target;
 
@@ -10,11 +11,14 @@ pub extern "c" fn uwsgi_log(log: [*:0]const u8, ...) void;
 
 var allocator = std.heap.c_allocator;
 var app: Symbol = undefined;
+pub export var j2env: ?*anyopaque = undefined;
 
 pub export fn zig_load_fn(name: [*:0]const u8) i32 {
     var lib = loadLibrary("");
     app = lib.getEntryPoint(name);
     uwsgi_log("[zsgi] found entrypoint symbol: %s\n", name);
+    j2env = j2.init_environment("plugins/zsgi/templates/");
+    uwsgi_log("[zsgi] jinja2 template engine initialized\n");
     return 0;
 }
 
